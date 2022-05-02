@@ -18,13 +18,10 @@ import { CountriesComponent } from './views/countries/countries.component';
     NavbarComponent,
     NavbarMobileComponent,
     HomeComponent,
-    CountriesComponent
+    CountriesComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
