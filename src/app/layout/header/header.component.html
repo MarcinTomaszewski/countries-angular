@@ -1,1 +1,14 @@
-<p>header works!</p>
+<header class="header">
+  <div class="navbar-wrapper">
+    <app-navbar *ngIf="menuActive"></app-navbar>
+
+    <app-navbar-mobile
+      *ngIf="!menuActive"
+      [isActive]="toggleMenu"
+    ></app-navbar-mobile>
+
+    <div *ngIf="!menuActive" class="header-icon" (click)="toggleMenuMobile()">
+      <i class="material-icons" [class]="'icon'">menu</i>
+    </div>
+  </div>
+</header>

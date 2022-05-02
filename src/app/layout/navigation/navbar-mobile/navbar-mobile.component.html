@@ -1,1 +1,14 @@
-<p>navbar-mobile works!</p>
+<nav class="mobile">
+  <ul class="mobile-menu" [class]="isActive ? 'active-menu' : null">
+    <li class="mobile-element">
+      <a routerLink="/home" routerLinkActive="active" class="mobile-link"
+        >Home</a
+      >
+    </li>
+    <li class="mobile-element">
+      <a routerLink="/countries" routerLinkActive="active" class="mobile-link"
+        >Countries</a
+      >
+    </li>
+  </ul>
+</nav>

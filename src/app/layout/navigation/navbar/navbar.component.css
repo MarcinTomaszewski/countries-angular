@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  max-width: fit-content;
+  height: 80px;
+  flex-direction: row;
+  margin: 0 auto;
+  transition: 0.5s ease all;
+}
+.navbar-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.navbar-list,
+.navbar-link {
+  padding: 0;
+  font-weight: 700;
+  color: lightgray;
+}
+.navbar-element {
+  position: relative;
+  margin: 0 16px;
+  padding: 12px;
+}
+.navbar-link {
+  font-size: 16px;
+}
+.navbar-link:hover {
+  color: var(--main-color-green);
+}
+.active {
+  color: var(--main-color-green);
+}
+
+.favorite-info {
+  position: absolute;
+  top: 2px;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background-color: rgb(233, 86, 86);
+  color: lightgray;
+  border-radius: 50%;
+  line-height: 15px;
+  font-size: 12px;
+}

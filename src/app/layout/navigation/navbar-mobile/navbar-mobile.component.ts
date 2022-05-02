@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar-mobile',
   templateUrl: './navbar-mobile.component.html',
-  styleUrls: ['./navbar-mobile.component.css']
+  styleUrls: ['./navbar-mobile.component.css'],
 })
 export class NavbarMobileComponent implements OnInit {
+  @Input() isActive!: boolean;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
