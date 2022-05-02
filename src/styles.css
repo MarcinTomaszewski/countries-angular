@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color-dark: #001e28;
+  --main-color-green: #42b983;
+  --main-color-warning: #dd4430;
+
+  --border-color-light: lightgrey;
+  --input-background-light: rgb(240, 231, 231);
+  --input-focus-visible: rgb(124, 124, 124);
+  --main-color-yellow: #fc0;
+
+  --table-color-row-odd: #eee;
+  --table-color-row-even: #def;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
