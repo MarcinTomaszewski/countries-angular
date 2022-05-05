@@ -6,5 +6,18 @@
   >
     {{ country.name }}
     <img [src]="country.flag" [alt]="country.name" class="country-img" />
+    <span
+      (click)="toggleFavorite($event, country.name)"
+      class="material-icons icon"
+      [class.favorite]="country.favorite"
+      title="Add to Favorite"
+      >star</span
+    >
+    <span
+      (click)="deleteCountry($event, country.name)"
+      class="material-icons icon"
+      title="Delete"
+      >delete_forever</span
+    >
   </a>
 </li>

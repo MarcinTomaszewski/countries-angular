@@ -10,6 +10,7 @@ export interface Country {
   alpha2Code: string;
   alpha3Code: string;
   numericCode: string;
+  favorite: boolean;
 }
 export interface City {
   name: string;

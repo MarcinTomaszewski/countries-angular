@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CountriesComponent } from './views/countries/countries.component';
+import { FavoriteCountriesComponent } from './views/favorite-countries/favorite-countries.component';
 import { HomeComponent } from './views/home/home.component';
 import { CountryComponent } from './components/country/country.component';
 import { NewCountryComponent } from './components/new-country/new-country.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'edit/:name', component: EditCountryComponent },
     ],
   },
-  { path: 'countries', component: CountriesComponent },
+  { path: 'favorite-countries', component: FavoriteCountriesComponent },
 ];
 
 @NgModule({

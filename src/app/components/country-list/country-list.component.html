@@ -10,12 +10,12 @@
   </div>
   <app-spinner *ngIf="isLoaded"></app-spinner>
 
-  <ul *ngIf="countriesLength" class="country-list">
-    <ng-container *ngFor="let country of countries$ | async; let i = index">
+  <ul *ngIf="countries.length" class="country-list">
+    <ng-container *ngFor="let country of countries; let i = index">
       <app-country-list-element [country]="country"></app-country-list-element>
     </ng-container>
   </ul>
   <ng-container *ngIf="!isLoaded">
-    <div *ngIf="!countriesLength">Brak wyników!</div>
+    <div *ngIf="!countries.length">Brak wyników!</div>
   </ng-container>
 </div>

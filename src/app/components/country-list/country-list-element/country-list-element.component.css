@@ -21,3 +21,10 @@
   background-color: var(--main-color-dark);
   color: white;
 }
+.icon:hover {
+  color: yellow;
+}
+
+.favorite {
+  color: yellow;
+}

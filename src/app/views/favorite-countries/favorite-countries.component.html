@@ -1,0 +1,5 @@
+<section class="wrapper">
+  <ng-container *ngFor="let country of favoriteObs$ | async">
+    <app-favorite-country [country]="country"></app-favorite-country>
+  </ng-container>
+</section>

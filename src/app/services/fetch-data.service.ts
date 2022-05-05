@@ -19,6 +19,7 @@ export class FetchDataService {
         ...country,
         id: Math.random(),
         cities: [{ name: 'Warsaw' }, { name: 'Berlin' }],
+        favorite: false,
       };
       acc.push(newCountry);
       return acc;

@@ -9,7 +9,6 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navigation/navbar/navbar.component';
 import { NavbarMobileComponent } from './layout/navigation/navbar-mobile/navbar-mobile.component';
 import { HomeComponent } from './views/home/home.component';
-import { CountriesComponent } from './views/countries/countries.component';
 import { CountryListComponent } from './components/country-list/country-list.component';
 import { CountryComponent } from './components/country/country.component';
 import { NewCountryComponent } from './components/new-country/new-country.component';
@@ -17,6 +16,8 @@ import { EditCountryComponent } from './components/edit-country/edit-country.com
 import { CountryListElementComponent } from './components/country-list/country-list-element/country-list-element.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FavoriteCountriesComponent } from './views/favorite-countries/favorite-countries.component';
+import { FavoriteCountryComponent } from './views/favorite-countries/favorite-country/favorite-country.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     NavbarMobileComponent,
     HomeComponent,
-    CountriesComponent,
     CountryListComponent,
     CountryComponent,
     NewCountryComponent,
     EditCountryComponent,
     CountryListElementComponent,
     SpinnerComponent,
+    FavoriteCountriesComponent,
+    FavoriteCountryComponent,
   ],
   imports: [
     BrowserModule,

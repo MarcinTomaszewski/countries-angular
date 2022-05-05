@@ -6,9 +6,13 @@
       >
     </li>
     <li class="navbar-element">
-      <a routerLink="/countries" class="navbar-link" routerLinkActive="active"
-        >Countries</a
-      >
+      <a
+        routerLink="/favorite-countries"
+        class="navbar-link"
+        routerLinkActive="active"
+        >Favorite
+      </a>
+      <span class="favorite-info">{{ favoriteLength }}</span>
     </li>
   </ul>
 </nav>

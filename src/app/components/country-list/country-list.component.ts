@@ -10,17 +10,16 @@ import { Country } from '../../utils/data';
   styleUrls: ['./country-list.component.css'],
 })
 export class CountryListComponent implements OnInit {
-  countries$: Observable<Country[]> | undefined;
+  countries: Country[] = [];
   isLoaded: boolean | undefined;
-  countriesLength = 0;
+
   constructor(private data: DataService, private fetchData: FetchDataService) {}
 
   ngOnInit(): void {
-    this.countries$ = this.data.getCountries();
-    this.fetchData.isLoaded.subscribe((isLoaded) => (this.isLoaded = isLoaded));
-    this.data.countryLength.subscribe(
-      (countriesLength) => (this.countriesLength = countriesLength)
+    this.data.countriesObs.subscribe(
+      (countries) => (this.countries = countries)
     );
+    this.fetchData.isLoaded.subscribe((isLoaded) => (this.isLoaded = isLoaded));
   }
 
   searchCountries(ref: HTMLInputElement) {
