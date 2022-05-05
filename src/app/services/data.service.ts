@@ -3,21 +3,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Country } from '../utils/data';
 import { FetchDataService } from './fetch-data.service';
 
-// const initialValue = {
-//   name: '',
-//   region: '',
-//   population: 0,
-//   flag: '',
-//   cities: [],
-//   id: 0,
-//   capital: '',
-//   nativeName: '',
-//   alpha2Code: '',
-//   alpha3Code: '',
-//   numericCode: '',
-//   favorite: false,
-// };
-
 @Injectable({
   providedIn: 'root',
 })

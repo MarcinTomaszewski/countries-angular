@@ -9,10 +9,10 @@ import { Country } from 'src/app/utils/data';
   styleUrls: ['./favorite-countries.component.css'],
 })
 export class FavoriteCountriesComponent implements OnInit {
-  favoriteObs$!: Observable<Country[]>;
+  favorite: Country[] = [];
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
-    this.favoriteObs$ = this.data.favoriteObs;
+    this.data.favoriteObs.subscribe((country) => (this.favorite = country));
   }
 }

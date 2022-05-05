@@ -1,5 +1,6 @@
 <section class="wrapper">
-  <ng-container *ngFor="let country of favoriteObs$ | async">
+  <p *ngIf="!favorite.length">Empty Favorite. Add Country to this section.</p>
+  <ng-container *ngFor="let country of favorite">
     <app-favorite-country [country]="country"></app-favorite-country>
   </ng-container>
 </section>

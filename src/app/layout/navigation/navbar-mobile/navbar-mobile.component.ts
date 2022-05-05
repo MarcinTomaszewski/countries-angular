@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -7,7 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavbarMobileComponent implements OnInit {
   @Input() isActive!: boolean;
-  constructor() {}
+  favoriteLength = 0;
+  constructor(private data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.data.favoriteObs.subscribe(
+      (countries) => (this.favoriteLength = countries.length)
+    );
+  }
 }
