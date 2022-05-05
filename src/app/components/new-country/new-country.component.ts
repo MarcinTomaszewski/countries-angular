@@ -44,8 +44,8 @@ export class NewCountryComponent implements OnInit {
     let flag = '';
     let cities = new FormArray([]);
     let nativeName = '';
-    let alpha2code = '';
-    let alpha3code = '';
+    let alpha2Code = '';
+    let alpha3Code = '';
     let numericCode = '';
 
     this.countryForm = new FormGroup({
@@ -56,8 +56,8 @@ export class NewCountryComponent implements OnInit {
       flag: new FormControl(flag, Validators.required),
       cities: cities,
       nativeName: new FormControl(nativeName, Validators.required),
-      alpha2code: new FormControl(alpha2code, Validators.required),
-      alpha3code: new FormControl(alpha3code, Validators.required),
+      alpha2Code: new FormControl(alpha2Code, Validators.required),
+      alpha3Code: new FormControl(alpha3Code, Validators.required),
       numericCode: new FormControl(numericCode, Validators.required),
     });
   }

@@ -15,29 +15,10 @@ export class FetchDataService {
 
   private createCountry(countries: Country[]): Country[] {
     return countries.reduce((acc: Country[], country) => {
-      const {
-        name,
-        population,
-        flag,
-        region,
-        capital,
-        nativeName,
-        alpha2Code,
-        alpha3Code,
-        numericCode,
-      } = country;
       const newCountry = {
-        name,
-        population,
-        flag,
-        region,
+        ...country,
         id: Math.random(),
         cities: [{ name: 'Warsaw' }, { name: 'Berlin' }],
-        capital,
-        nativeName,
-        alpha2Code,
-        alpha3Code,
-        numericCode,
       };
       acc.push(newCountry);
       return acc;
