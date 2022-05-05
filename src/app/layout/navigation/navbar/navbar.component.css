@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   max-width: fit-content;
-  height: 80px;
+  height: 15vh;
   flex-direction: row;
   margin: 0 auto;
   transition: 0.5s ease all;
