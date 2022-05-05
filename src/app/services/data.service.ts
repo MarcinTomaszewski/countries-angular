@@ -40,7 +40,7 @@ export class DataService {
     return this.countriesObs;
   }
 
-  getCountry(name: string) {
+  getCountry(name: string): Observable<Country[]> {
     this.country = this.countries.filter((country) => country.name === name);
     this.countryObs.next(this.country);
     return this.countryObs;
@@ -54,6 +54,10 @@ export class DataService {
     return this.countryObs;
   }
 
+  getCountryObj(name: string): Country | undefined {
+    return this.countries.find((country) => country.name === name);
+  }
+
   searchCountries(value: string) {
     const searchCountries = this.countries.filter((country) =>
       country.name.toLowerCase().includes(value.toLowerCase())
@@ -64,6 +68,12 @@ export class DataService {
 
   addCountry(country: Country) {
     this.countries.unshift(country);
+    this.countriesObs.next(this.countries);
+  }
+
+  editCountry(name: string, newCountry: Country) {
+    this.countries = this.countries.filter((country) => country.name !== name);
+    this.countries.unshift(newCountry);
     this.countriesObs.next(this.countries);
   }
 }

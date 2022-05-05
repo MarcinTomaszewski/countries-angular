@@ -63,7 +63,6 @@ export class NewCountryComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Submit', this.countryForm.value);
     this.data.addCountry(this.countryForm.value);
     this.router.navigate(['/home/' + this.countryForm.value.name], {
       relativeTo: this.route,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { Country } from 'src/app/utils/data';
@@ -13,11 +13,7 @@ export class CountryComponent implements OnInit {
   name = 'Poland';
   countryObs$!: Observable<Country[]>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private data: DataService
-  ) {}
+  constructor(private route: ActivatedRoute, private data: DataService) {}
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       params['name']

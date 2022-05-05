@@ -1,0 +1,22 @@
+.form-wrapper {
+  width: 70vw;
+  margin-top: 10px;
+}
+.form {
+  width: 450px;
+  margin: 10px auto;
+  font-size: 12px;
+}
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.input-wrapper input {
+  padding: 2px;
+  font-size: 14px;
+}
+.input-wrapper label {
+  padding: 2px;
+  font-size: 14px;
+}

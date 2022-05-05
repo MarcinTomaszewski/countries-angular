@@ -1,1 +1,55 @@
-<p>edit-country works!</p>
+<section class="form-wrapper">
+  <h1>Edit Country</h1>
+  <form [formGroup]="countryForm" (submit)="onSubmit()" class="form">
+    <div class="input-wrapper">
+      <label for="name">Name</label>
+      <input formControlName="name" type="text" id="name" />
+    </div>
+    <div class="input-wrapper">
+      <label for="capital">Capital</label>
+      <input formControlName="capital" type="text" id="capital" />
+    </div>
+
+    <div class="input-wrapper">
+      <label for="region">Region</label>
+      <input formControlName="region" type="text" id="region" />
+    </div>
+    <div class="input-wrapper">
+      <label for="population">Population</label
+      ><input formControlName="population" type="number" id="population" />
+    </div>
+    <div class="input-wrapper">
+      <label for="flag">Flag URL</label>
+      <input formControlName="flag" type="text" id="flag" />
+    </div>
+
+    <div class="input-wrapper">
+      <label for="nativeName">Native Name</label>
+      <input formControlName="nativeName" type="text" id="nativeName" />
+    </div>
+    <div class="input-wrapper">
+      <label for="alpha2Code">Alpha2Code</label
+      ><input formControlName="alpha2Code" type="text" id="alpha2Code" />
+    </div>
+    <div class="input-wrapper">
+      <label for="alpha3Code">Alpha3Code</label
+      ><input formControlName="alpha3Code" type="text" id="alpha3Code" />
+    </div>
+    <div class="input-wrapper">
+      <label for="numericCode">Numeric Code</label
+      ><input formControlName="numericCode" type="text" id="numericCode" />
+    </div>
+    <div class="input-wrapper" formArrayName="cities">
+      <label for="cities">Cities</label>
+      <div
+        *ngFor="let citiesCtrl of controls; let i = index"
+        [formGroupName]="i"
+      >
+        <input formControlName="name" type="text" id="cities" />
+        <button type="button" (click)="onDeleteCity(i)">X</button>
+      </div>
+      <button type="button" (click)="onAddCity()">Add City</button>
+    </div>
+    <button type="submit" [disabled]="!countryForm.valid">Zapisz</button>
+  </form>
+</section>
