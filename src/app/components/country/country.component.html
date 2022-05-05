@@ -1,0 +1,56 @@
+<div class="btn-wrapper">
+  <a routerLink="/home/new" class="btn">Add New Country</a>
+</div>
+
+<section class="wrapper">
+  <div *ngFor="let country of countryObs$ | async" class="country">
+    <div class="title">
+      <h3>
+        {{ country.name }}
+        <br />
+        <small> {{ country.nativeName }} </small>
+      </h3>
+      <a [routerLink]="['/home/edit/' + country.name]" class="btn-edit"
+        >Edit Country</a
+      >
+    </div>
+
+    <div class="table">
+      <div class="table-row">
+        <span>Alpha Code 2</span>
+        <span> {{ country.alpha2Code }} </span>
+      </div>
+      <div class="table-row">
+        <span>Alpha Code 3</span>
+        <span> {{ country.alpha3Code }} </span>
+      </div>
+      <div class="table-row">
+        <span>Capital</span>
+        <span>{{ country.capital }} </span>
+      </div>
+      <div class="table-row">
+        <span>Numeric Code</span>
+        <span>{{ country.numericCode }} </span>
+      </div>
+      <div class="table-row">
+        <span>Population</span>
+        <span>{{ country.population }} </span>
+      </div>
+      <div class="table-row">
+        <span>Region</span>
+        <span>{{ country.region }} </span>
+      </div>
+      <div class="table-row">
+        <span>Cities</span>
+        <span *ngFor="let city of country.cities">{{ city.name }} </span>
+      </div>
+      <div class="table-row" style="margin: 0 auto">
+        <img
+          [src]="country.flag"
+          [alt]="country.name"
+          style="width: 100px; height: 70px"
+        />
+      </div>
+    </div>
+  </div>
+</section>

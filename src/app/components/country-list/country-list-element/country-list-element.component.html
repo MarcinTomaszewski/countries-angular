@@ -1,0 +1,10 @@
+<li key="index">
+  <a
+    [routerLink]="['/home/' + country.name]"
+    routerLinkActive="active"
+    class="country"
+  >
+    {{ country.name }}
+    <img [src]="country.flag" [alt]="country.name" class="country-img" />
+  </a>
+</li>

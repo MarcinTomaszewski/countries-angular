@@ -1,0 +1,23 @@
+.country {
+  display: block;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 7px;
+  background-color: lightgray;
+  transition: 0.3s;
+  color: black;
+}
+.country:hover {
+  background-color: var(--main-color-dark);
+  color: white;
+  cursor: pointer;
+  padding: 9px;
+}
+.country-img {
+  width: 20px;
+  height: 10px;
+}
+.active {
+  background-color: var(--main-color-dark);
+  color: white;
+}
