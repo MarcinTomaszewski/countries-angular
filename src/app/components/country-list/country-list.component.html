@@ -6,6 +6,7 @@
       placeholder="search"
       (input)="searchCountries(inputRef)"
       class="input"
+      [value]="inputValue"
     />
   </div>
   <app-spinner *ngIf="isLoaded"></app-spinner>

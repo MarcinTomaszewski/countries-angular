@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { FetchDataService } from 'src/app/services/fetch-data.service';
 import { Country } from '../../utils/data';
@@ -12,7 +11,7 @@ import { Country } from '../../utils/data';
 export class CountryListComponent implements OnInit {
   countries: Country[] = [];
   isLoaded: boolean | undefined;
-
+  inputValue = '';
   constructor(private data: DataService, private fetchData: FetchDataService) {}
 
   ngOnInit(): void {
@@ -20,9 +19,11 @@ export class CountryListComponent implements OnInit {
       (countries) => (this.countries = countries)
     );
     this.fetchData.isLoaded.subscribe((isLoaded) => (this.isLoaded = isLoaded));
+    this.data.inputValueObs.subscribe((value) => (this.inputValue = value));
   }
 
   searchCountries(ref: HTMLInputElement) {
+    this.data.saveInputValue(ref.value);
     this.data.searchCountries(ref.value);
   }
 }

@@ -10,12 +10,19 @@ export class DataService {
   country: Country[] = [];
   countries: Country[] = [];
   favorite: Country[] = [];
+  inputValue = '';
   countryLength = new Subject<number>();
   countryObs = new BehaviorSubject<Country[]>(this.country);
   countriesObs = new BehaviorSubject<Country[]>([]);
   favoriteObs = new BehaviorSubject<Country[]>([]);
+  inputValueObs = new BehaviorSubject<string>('');
 
   constructor(private fetchData: FetchDataService) {}
+
+  saveInputValue(value: string) {
+    this.inputValue = value;
+    this.inputValueObs.next(this.inputValue);
+  }
 
   getCountry(name: string): Observable<Country[]> {
     this.country = this.countries.filter((country) => country.name === name);
