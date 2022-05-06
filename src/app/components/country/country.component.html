@@ -42,7 +42,9 @@
       </div>
       <div class="table-row">
         <span>Cities</span>
-        <span *ngFor="let city of country.cities">{{ city.name }} </span>
+        <div>
+          <p *ngFor="let city of country.cities">{{ city.name }}</p>
+        </div>
       </div>
       <div class="table-row" style="margin: 0 auto">
         <img

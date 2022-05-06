@@ -6,10 +6,11 @@
 
 .country {
   width: 50%;
-  max-height: 68vh;
+  min-height: 68vh;
   margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 4px;
+  overflow-y: scroll;
 }
 .country:hover {
   border-color: rgb(195, 195, 233);

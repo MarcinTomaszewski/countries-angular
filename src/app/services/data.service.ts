@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Country } from '../utils/data';
 import { FetchDataService } from './fetch-data.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,14 @@ export class DataService {
   inputValue = '';
   countryLength = new Subject<number>();
   countryObs = new BehaviorSubject<Country[]>(this.country);
-  countriesObs = new BehaviorSubject<Country[]>([]);
+  countriesObs = new BehaviorSubject<Country[]>(this.countries);
   favoriteObs = new BehaviorSubject<Country[]>([]);
   inputValueObs = new BehaviorSubject<string>('');
 
-  constructor(private fetchData: FetchDataService) {}
+  constructor(
+    private fetchData: FetchDataService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   saveInputValue(value: string) {
     this.inputValue = value;
@@ -56,9 +60,22 @@ export class DataService {
   }
 
   editCountry(name: string, newCountry: Country) {
-    this.countries = this.countries.filter((country) => country.name !== name);
-    this.countries.unshift(newCountry);
+    const countries = this.countries.map((country) => {
+      if (country.name === name) {
+        country = { ...country, ...newCountry };
+      }
+      return country;
+    });
+    this.countries = countries;
     this.countriesObs.next(this.countries);
+    const favorite = this.favorite.map((country) => {
+      if (country.name === name) country = { ...country, ...newCountry };
+      return country;
+    });
+    this.favorite = favorite;
+    this.favoriteObs.next(this.favorite);
+    this.localStorageService.setCountries(this.countries);
+    this.localStorageService.setFavoriteCountries(this.favorite);
   }
 
   toggleFavorite(name: string) {
@@ -67,12 +84,16 @@ export class DataService {
         country.favorite = true;
         this.favorite.push(country);
         this.favoriteObs.next(this.favorite.slice());
+        this.localStorageService.setFavoriteCountries(this.favorite.slice());
+        this.localStorageService.setCountries(this.countries);
       } else if (country.name === name && country.favorite) {
         country.favorite = false;
         this.favorite = this.favorite.filter(
           (country) => country.name !== name
         );
         this.favoriteObs.next(this.favorite.slice());
+        this.localStorageService.setFavoriteCountries(this.favorite.slice());
+        this.localStorageService.setCountries(this.countries);
       }
       return country;
     });
@@ -83,5 +104,8 @@ export class DataService {
     this.countries = this.countries.filter((country) => country.name !== name);
     this.favoriteObs.next(this.favorite);
     this.countriesObs.next(this.countries);
+    if (this.country[0].name === name) {
+      this.countryObs.next([this.countries[Math.floor(Math.random() * 100)]]);
+    }
   }
 }

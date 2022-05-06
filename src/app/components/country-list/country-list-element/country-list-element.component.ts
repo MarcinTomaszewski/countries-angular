@@ -30,5 +30,7 @@ export class CountryListElementComponent {
     event.preventDefault();
     event.stopPropagation();
     this.data.deleteCountry(name);
+
+    this.router.navigate(['/home'], { relativeTo: this.route });
   }
 }

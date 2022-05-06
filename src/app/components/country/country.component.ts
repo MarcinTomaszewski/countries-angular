@@ -10,15 +10,15 @@ import { Country } from 'src/app/utils/data';
   styleUrls: ['./country.component.css'],
 })
 export class CountryComponent implements OnInit {
-  name = 'Poland';
   countryObs$!: Observable<Country[]>;
 
   constructor(private route: ActivatedRoute, private data: DataService) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       params['name']
         ? (this.countryObs$ = this.data.getCountry(params['name']))
-        : (this.countryObs$ = this.data.getCountryFromApi(this.name));
+        : (this.countryObs$ = this.data.countryObs);
     });
   }
 }
