@@ -16,28 +16,37 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    let numRandom = Math.floor(Math.random() * 100);
+
     if (localStorage.getItem('favoriteCountries')) {
       const favoriteCountries = this.localStorageService.getFavoriteCountries();
+      const countries = this.localStorageService.getCountries();
+
       this.data.favorite = favoriteCountries;
       this.data.favoriteObs.next(favoriteCountries);
-      const countries = this.localStorageService.getCountries();
       this.data.countries = countries;
       this.data.countriesObs.next(countries);
       this.data.countryLength.next(countries.length);
     }
     if (localStorage.getItem('countries')) {
       const countries = this.localStorageService.getCountries();
+      const country = countries[numRandom];
+
       this.data.countries = countries;
-      this.data.countryObs.next([countries[Math.floor(Math.random() * 100)]]);
+      this.data.country = [country];
+      this.data.countryObs.next([country]);
       this.data.countriesObs.next(countries);
       this.data.countryLength.next(countries.length);
     } else {
       this.fetchData.getCountries().subscribe((countries) => {
+        const country = countries[numRandom];
         this.data.countries = countries;
-        this.data.countryObs.next([countries[Math.floor(Math.random() * 100)]]);
+        this.data.country = [country];
+        this.data.countryObs.next([country]);
         this.data.countriesObs.next(countries);
-        this.fetchData.setIsLoaded(false);
         this.data.countryLength.next(countries.length);
+        this.fetchData.setIsLoaded(false);
+
         this.localStorageService.setCountries(countries);
       });
     }
