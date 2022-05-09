@@ -108,4 +108,40 @@ export class DataService {
       this.countryObs.next([this.countries[Math.floor(Math.random() * 100)]]);
     }
   }
+
+  initCountriesWhenFavoriteExistsInLocalStorage() {
+    const favoriteCountries = this.localStorageService.getFavoriteCountries();
+    const countries = this.localStorageService.getCountries();
+
+    this.favorite = favoriteCountries;
+    this.favoriteObs.next(favoriteCountries);
+    this.countries = countries;
+    this.countriesObs.next(countries);
+    this.countryLength.next(countries.length);
+  }
+
+  initCountriesWhenCountiresExistsInLocalStorage(numRandom: number) {
+    const countries = this.localStorageService.getCountries();
+    const country = countries[numRandom];
+
+    this.countries = countries;
+    this.country = [country];
+    this.countryObs.next([country]);
+    this.countriesObs.next(countries);
+    this.countryLength.next(countries.length);
+  }
+
+  initCountriesWhenLocalStorageEmpty(numRandom: number) {
+    this.fetchData.getCountries().subscribe((countries) => {
+      const country = countries[numRandom];
+      this.countries = countries;
+      this.country = [country];
+      this.countryObs.next([country]);
+      this.countriesObs.next(countries);
+      this.countryLength.next(countries.length);
+      this.fetchData.setIsLoaded(false);
+
+      this.localStorageService.setCountries(countries);
+    });
+  }
 }
