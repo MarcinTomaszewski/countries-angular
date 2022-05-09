@@ -13,7 +13,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: CountryComponent },
-      { path: 'new', component: NewCountryComponent },
+      { path: 'add-country', component: NewCountryComponent },
       { path: ':name', component: CountryComponent },
       { path: 'edit/:name', component: EditCountryComponent },
     ],

@@ -19,6 +19,7 @@
 }
 .navbar-element {
   position: relative;
+  white-space: nowrap;
   margin: 0 16px;
   padding: 12px;
 }
