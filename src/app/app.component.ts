@@ -9,24 +9,16 @@ import { LocalStorageService } from './services/local-storage.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private data: DataService,
-    private fetchData: FetchDataService,
-    private localStorageService: LocalStorageService
-  ) {}
+  constructor(private data: DataService) {}
 
   ngOnInit(): void {
     let numRandom = Math.floor(Math.random() * 100);
-    const favorite = localStorage.getItem('favoriteCountries');
     const countries = localStorage.getItem('countries');
 
-    if (favorite) {
-      this.data.initCountriesWhenFavoriteExistsInLocalStorage();
-    }
     if (countries) {
-      this.data.initCountriesWhenCountiresExistsInLocalStorage(numRandom);
+      this.data.getCountriesFromLocaleStorage(numRandom);
     } else {
-      this.data.initCountriesWhenLocalStorageEmpty(numRandom);
+      this.data.initCountries(numRandom);
     }
   }
 }

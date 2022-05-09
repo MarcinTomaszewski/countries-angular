@@ -10,12 +10,10 @@ import { LocalStorageService } from './local-storage.service';
 export class DataService {
   country: Country[] = [];
   countries: Country[] = [];
-  favorite: Country[] = [];
   inputValue = '';
   countryLength = new Subject<number>();
   countryObs = new BehaviorSubject<Country[]>(this.country);
   countriesObs = new BehaviorSubject<Country[]>(this.countries);
-  favoriteObs = new BehaviorSubject<Country[]>([]);
   inputValueObs = new BehaviorSubject<string>('');
 
   constructor(
@@ -68,59 +66,34 @@ export class DataService {
     });
     this.countries = countries;
     this.countriesObs.next(this.countries);
-    const favorite = this.favorite.map((country) => {
-      if (country.name === name) country = { ...country, ...newCountry };
-      return country;
-    });
-    this.favorite = favorite;
-    this.favoriteObs.next(this.favorite);
     this.localStorageService.setCountries(this.countries);
-    this.localStorageService.setFavoriteCountries(this.favorite);
   }
 
   toggleFavorite(name: string) {
-    this.countries.map((country) => {
+    this.countries = this.countries.map((country) => {
       if (country.name === name && !country.favorite) {
         country.favorite = true;
-        this.favorite.push(country);
-        this.favoriteObs.next(this.favorite.slice());
-        this.localStorageService.setFavoriteCountries(this.favorite.slice());
-        this.localStorageService.setCountries(this.countries);
+        return country;
       } else if (country.name === name && country.favorite) {
         country.favorite = false;
-        this.favorite = this.favorite.filter(
-          (country) => country.name !== name
-        );
-        this.favoriteObs.next(this.favorite.slice());
-        this.localStorageService.setFavoriteCountries(this.favorite.slice());
-        this.localStorageService.setCountries(this.countries);
+        return country;
       }
+
+      this.countriesObs.next(this.countries);
+      this.localStorageService.setCountries(this.countries);
       return country;
     });
   }
 
   deleteCountry(name: string) {
-    this.favorite = this.favorite.filter((country) => country.name !== name);
     this.countries = this.countries.filter((country) => country.name !== name);
-    this.favoriteObs.next(this.favorite);
     this.countriesObs.next(this.countries);
     if (this.country[0].name === name) {
       this.countryObs.next([this.countries[Math.floor(Math.random() * 100)]]);
     }
   }
 
-  initCountriesWhenFavoriteExistsInLocalStorage() {
-    const favoriteCountries = this.localStorageService.getFavoriteCountries();
-    const countries = this.localStorageService.getCountries();
-
-    this.favorite = favoriteCountries;
-    this.favoriteObs.next(favoriteCountries);
-    this.countries = countries;
-    this.countriesObs.next(countries);
-    this.countryLength.next(countries.length);
-  }
-
-  initCountriesWhenCountiresExistsInLocalStorage(numRandom: number) {
+  getCountriesFromLocaleStorage(numRandom: number) {
     const countries = this.localStorageService.getCountries();
     const country = countries[numRandom];
 
@@ -131,7 +104,7 @@ export class DataService {
     this.countryLength.next(countries.length);
   }
 
-  initCountriesWhenLocalStorageEmpty(numRandom: number) {
+  initCountries(numRandom: number) {
     this.fetchData.getCountries().subscribe((countries) => {
       const country = countries[numRandom];
       this.countries = countries;
