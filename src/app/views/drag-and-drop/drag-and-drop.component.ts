@@ -23,6 +23,7 @@ export class DragAndDropComponent {
   }
 
   handleFiles(files: FileList | null, ref?: HTMLDivElement) {
+    console.log(files);
     if (!files) return;
     for (var i = 0, len = files.length; i < len; i++) {
       this.createImage(files[i], ref);
@@ -39,10 +40,12 @@ export class DragAndDropComponent {
   }
 
   createImage(image: File, ref?: HTMLDivElement) {
+    console.log(ref?.childNodes[1].childNodes[0]);
+    ref?.removeChild(ref.childNodes[1]);
     var imgView = document.createElement('div');
     imgView.className = 'image-view';
-    // @ts-expect-error:
-    ref.appendChild(imgView);
+
+    ref?.appendChild(imgView);
 
     var img = document.createElement('img');
     imgView.appendChild(img);

@@ -49,7 +49,7 @@ export class EditCountryComponent implements OnInit {
     let capital = countryInForm?.capital;
     let region = countryInForm?.region;
     let population = countryInForm?.population;
-    let flag = countryInForm?.flag;
+    // let flag = countryInForm?.flag;
     let cities = new FormArray([]);
     let nativeName = countryInForm?.nativeName;
     let alpha2Code = countryInForm?.alpha2Code;
@@ -81,6 +81,7 @@ export class EditCountryComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.countryForm.value);
     this.data.editCountry(this.name, this.countryForm.value);
     this.router.navigate(['/home/' + this.countryForm.value.name], {
       relativeTo: this.route,
@@ -88,6 +89,7 @@ export class EditCountryComponent implements OnInit {
   }
 
   setImageFile(event: Event) {
+    console.log('setImage');
     const image = document.getElementById('image') as HTMLImageElement;
     const input = event.target as HTMLInputElement;
     const file = input.files as FileList;

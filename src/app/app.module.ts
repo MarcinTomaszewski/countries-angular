@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FavoriteCountriesComponent } from './views/favorite-countries/favorite-countries.component';
 import { FavoriteCountryComponent } from './views/favorite-countries/favorite-country/favorite-country.component';
 import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.component';
+import { FileReaderComponent } from './views/file-reader/file-reader.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.compon
     FavoriteCountriesComponent,
     FavoriteCountryComponent,
     DragAndDropComponent,
+    FileReaderComponent,
   ],
   imports: [
     BrowserModule,
