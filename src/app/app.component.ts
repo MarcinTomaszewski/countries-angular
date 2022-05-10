@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './services/data.service';
-import { FetchDataService } from './services/fetch-data.service';
-import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',

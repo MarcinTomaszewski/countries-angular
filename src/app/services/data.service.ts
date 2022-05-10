@@ -60,7 +60,19 @@ export class DataService {
   editCountry(name: string, newCountry: Country) {
     const countries = this.countries.map((country) => {
       if (country.name === name) {
-        country = { ...country, ...newCountry };
+        country = {
+          ...country,
+          name: newCountry.name,
+          capital: newCountry.capital,
+          region: newCountry.region,
+          population: newCountry.population,
+          flag: newCountry.flag,
+          cities: newCountry.cities,
+          nativeName: newCountry.nativeName,
+          alpha2Code: newCountry.alpha2Code,
+          alpha3Code: newCountry.alpha3Code,
+          numericCode: newCountry.numericCode,
+        };
       }
       return country;
     });

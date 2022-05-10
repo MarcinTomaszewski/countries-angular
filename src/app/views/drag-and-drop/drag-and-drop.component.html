@@ -1,0 +1,15 @@
+<section class="wrapper">
+  <div
+    #drop
+    class="drop-region"
+    class="drop-region"
+    (click)="addImage(drop)"
+    (dragenter)="preventDefault($event)"
+    (dragleave)="preventDefault($event)"
+    (dragover)="preventDefault($event)"
+    (drop)="preventDefault($event); handleDrop($event, drop)"
+  >
+    <div class="drop-message">Drag & Drop images</div>
+    <div class="image-preview"></div>
+  </div>
+</section>

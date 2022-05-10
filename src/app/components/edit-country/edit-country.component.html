@@ -20,7 +20,13 @@
     </div>
     <div class="input-wrapper">
       <label for="flag">Flag URL</label>
-      <input formControlName="flag" type="text" id="flag" />
+      <input
+        formControlName="flag"
+        type="file"
+        id="flag"
+        accept="image/jpeg, image/webp"
+        (change)="setImageFile($event)"
+      />
     </div>
 
     <div class="input-wrapper">
@@ -51,5 +57,6 @@
       <button type="button" (click)="onAddCity()">Add City</button>
     </div>
     <button type="submit" [disabled]="!countryForm.valid">Zapisz</button>
+    <img src="" alt="" id="image" />
   </form>
 </section>
