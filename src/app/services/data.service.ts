@@ -78,7 +78,7 @@ export class DataService {
     });
     this.countries = countries;
     this.countriesObs.next(this.countries);
-    this.localStorageService.setCountries(this.countries);
+    // this.localStorageService.setCountries(this.countries);
   }
 
   toggleFavorite(name: string) {
@@ -92,7 +92,7 @@ export class DataService {
       }
 
       this.countriesObs.next(this.countries);
-      this.localStorageService.setCountries(this.countries);
+      // this.localStorageService.setCountries(this.countries);
       return country;
     });
   }
@@ -126,7 +126,7 @@ export class DataService {
       this.countryLength.next(countries.length);
       this.fetchData.setIsLoaded(false);
 
-      this.localStorageService.setCountries(countries);
+      // this.localStorageService.setCountries(countries);
     });
   }
 }
