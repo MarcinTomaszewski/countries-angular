@@ -12,7 +12,7 @@ import { City, Country } from 'src/app/utils/data';
 export class EditCountryComponent implements OnInit {
   countryForm!: FormGroup;
   name = '';
-
+  flag: string | ArrayBuffer | null = '';
   constructor(
     private data: DataService,
     private router: Router,
@@ -49,7 +49,6 @@ export class EditCountryComponent implements OnInit {
     let capital = countryInForm?.capital;
     let region = countryInForm?.region;
     let population = countryInForm?.population;
-    // let flag = countryInForm?.flag;
     let cities = new FormArray([]);
     let nativeName = countryInForm?.nativeName;
     let alpha2Code = countryInForm?.alpha2Code;
@@ -81,15 +80,16 @@ export class EditCountryComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.countryForm.value);
-    this.data.editCountry(this.name, this.countryForm.value);
+    this.data.editCountry(this.name, {
+      ...this.countryForm.value,
+      flag: this.flag,
+    });
     this.router.navigate(['/home/' + this.countryForm.value.name], {
       relativeTo: this.route,
     });
   }
 
   setImageFile(event: Event) {
-    console.log('setImage');
     const image = document.getElementById('image') as HTMLImageElement;
     const input = event.target as HTMLInputElement;
     const file = input.files as FileList;
@@ -97,7 +97,7 @@ export class EditCountryComponent implements OnInit {
     reader.addEventListener('load', () => {
       // @ts-expect-error:
       image.src = reader.result;
-      this.countryForm.value.flag = reader.result;
+      this.flag = reader.result;
     });
 
     reader.readAsDataURL(file[0]);

@@ -6,6 +6,7 @@ import { CountryComponent } from './components/country/country.component';
 import { NewCountryComponent } from './components/new-country/new-country.component';
 import { EditCountryComponent } from './components/edit-country/edit-country.component';
 import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.component';
+import { FileReaderComponent } from './views/file-reader/file-reader.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,8 +15,9 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: CountryComponent },
-      { path: 'drag-and-drop', component: DragAndDropComponent },
       { path: 'add-country', component: NewCountryComponent },
+      { path: 'drag-and-drop', component: DragAndDropComponent },
+      { path: 'file-reader', component: FileReaderComponent },
       { path: ':name', component: CountryComponent },
       { path: 'edit/:name', component: EditCountryComponent },
     ],

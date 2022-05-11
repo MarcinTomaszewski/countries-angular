@@ -9,7 +9,7 @@ export class DragAndDropComponent {
   @ViewChild('drop') child!: ElementRef;
   isClicked = false;
   inputFile: HTMLInputElement;
-
+  @ViewChild('image', { static: false }) image!: ElementRef;
   constructor() {
     this.inputFile = this.createInputFile();
   }
@@ -24,6 +24,7 @@ export class DragAndDropComponent {
 
   handleFiles(files: FileList | null, ref?: HTMLDivElement) {
     console.log(files);
+
     if (!files) return;
     for (var i = 0, len = files.length; i < len; i++) {
       this.createImage(files[i], ref);
@@ -40,7 +41,6 @@ export class DragAndDropComponent {
   }
 
   createImage(image: File, ref?: HTMLDivElement) {
-    console.log(ref?.childNodes[1].childNodes[0]);
     ref?.removeChild(ref.childNodes[1]);
     var imgView = document.createElement('div');
     imgView.className = 'image-view';
@@ -55,9 +55,12 @@ export class DragAndDropComponent {
     imgView.appendChild(overlay);
 
     var reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = (e) => {
       // @ts-expect-error:
       img.src = e.target.result;
+
+      // @ts-expect-error:
+      this.image.nativeElement.src = e.target.result;
     };
 
     reader.readAsDataURL(image);
