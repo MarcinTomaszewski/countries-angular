@@ -1,12 +1,12 @@
-<section class="wrapper">
-  <div *ngFor="let country of countryObs$ | async" class="country">
+<section class="wrapper" *ngIf="country">
+  <div class="country">
     <div class="title">
       <h3>
         {{ country.name }}
         <br />
         <small> {{ country.nativeName }} </small>
       </h3>
-      <a [routerLink]="['/home/edit/' + country.name]" class="btn-edit"
+      <a [routerLink]="['/home/edit/' + country.id]" class="btn-edit"
         >Edit Country</a
       >
     </div>

@@ -15,11 +15,12 @@ import { NewCountryComponent } from './components/new-country/new-country.compon
 import { EditCountryComponent } from './components/edit-country/edit-country.component';
 import { CountryListElementComponent } from './components/country-list/country-list-element/country-list-element.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FavoriteCountriesComponent } from './views/favorite-countries/favorite-countries.component';
 import { FavoriteCountryComponent } from './views/favorite-countries/favorite-country/favorite-country.component';
 import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.component';
 import { FileReaderComponent } from './views/file-reader/file-reader.component';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +40,14 @@ import { FileReaderComponent } from './views/file-reader/file-reader.component';
     FavoriteCountryComponent,
     DragAndDropComponent,
     FileReaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

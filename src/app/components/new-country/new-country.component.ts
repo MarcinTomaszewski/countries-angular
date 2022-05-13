@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { CountriesService } from 'src/app/services/countries.service';
 
 @Component({
   selector: 'app-new-country',
@@ -10,10 +10,11 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class NewCountryComponent implements OnInit {
   countryForm!: FormGroup;
+  active = false;
   constructor(
-    private data: DataService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private countries: CountriesService
   ) {}
 
   get controls() {
@@ -22,6 +23,7 @@ export class NewCountryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.active ? false : undefined;
     this.initCountryForm();
   }
 
@@ -63,9 +65,11 @@ export class NewCountryComponent implements OnInit {
   }
 
   onSubmit() {
-    this.data.addCountry(this.countryForm.value);
-    this.router.navigate(['/home/' + this.countryForm.value.name], {
-      relativeTo: this.route,
-    });
+    this.countries.addCountry(this.countryForm.value);
+    this.active = true;
+    this.countryForm.reset();
+    setTimeout(() => {
+      this.active = false;
+    }, 2000);
   }
 }

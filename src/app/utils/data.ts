@@ -1,5 +1,9 @@
+export interface Countries {
+  [key: string | number]: Country;
+}
+
 export interface Country {
-  id?: number;
+  id: string;
   capital: string;
   name: string;
   region: string;
@@ -14,6 +18,13 @@ export interface Country {
 }
 export interface City {
   name: string;
+}
+
+export interface User {
+  id?: number;
+  name: string;
+  password: string;
+  favorite: string[];
 }
 export const countries = [
   {

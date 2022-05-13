@@ -1,20 +1,20 @@
 <li key="index">
   <a
-    [routerLink]="['/home/' + country.name]"
+    [routerLink]="['/home/' + country.id]"
     routerLinkActive="active"
     class="country"
   >
     {{ country.name }}
     <img [src]="country.flag" [alt]="country.name" class="country-img" />
     <span
-      (click)="toggleFavorite($event, country.name)"
+      (click)="toggleFavorite($event, country)"
       class="material-icons icon"
       [class.favorite]="country.favorite"
       [title]="country.favorite ? 'Remove from Favorite' : 'Add to Favorite'"
       >star</span
     >
     <span
-      (click)="deleteCountry($event, country.name)"
+      (click)="deleteCountry($event, country.id)"
       class="material-icons icon"
       title="Delete from data"
       >delete_forever</span

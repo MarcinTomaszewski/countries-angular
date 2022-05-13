@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
+import { HttpService } from 'src/app/services/http.service';
 import { Country } from 'src/app/utils/data';
 
 @Component({
@@ -10,15 +9,21 @@ import { Country } from 'src/app/utils/data';
   styleUrls: ['./country.component.css'],
 })
 export class CountryComponent implements OnInit {
-  countryObs$!: Observable<Country[]>;
-
-  constructor(private route: ActivatedRoute, private data: DataService) {}
+  country!: Country;
+  id = '-N1sV3apb6CMVmW71F6D';
+  constructor(private route: ActivatedRoute, private http: HttpService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      params['name']
-        ? (this.countryObs$ = this.data.getCountry(params['name']))
-        : (this.countryObs$ = this.data.countryObs);
+      if (!params['id']) {
+        this.http
+          .getCountry(this.id)
+          .subscribe((country) => (this.country = country));
+      } else {
+        this.http
+          .getCountry(params['id'])
+          .subscribe((country) => (this.country = country));
+      }
     });
   }
 }

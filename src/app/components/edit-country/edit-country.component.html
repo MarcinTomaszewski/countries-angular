@@ -18,7 +18,7 @@
       <label for="population">Population</label
       ><input formControlName="population" type="number" id="population" />
     </div>
-    <!-- <div class="input-wrapper">
+    <div class="input-wrapper">
       <label for="flag">Flag URL</label>
       <input
         formControlName="flag"
@@ -27,7 +27,7 @@
         accept="image/jpeg, image/webp, image/jpg, image/svg"
         (change)="setImageFile($event)"
       />
-    </div> -->
+    </div>
 
     <div class="input-wrapper">
       <label for="nativeName">Native Name</label>
@@ -56,7 +56,7 @@
       </div>
       <button type="button" (click)="onAddCity()">Add City</button>
     </div>
-    <div class="input-wrapper">
+    <!-- <div class="input-wrapper">
       <label for="flag">Flag URL</label>
       <input
         formControlName="flag"
@@ -65,7 +65,7 @@
         accept="image/jpeg, image/webp, image/jpg, image/svg"
         (change)="setImageFile($event)"
       />
-    </div>
+    </div> -->
     <button type="submit" [disabled]="!countryForm.valid">Zapisz</button>
     <img src="" alt="" id="image" />
   </form>

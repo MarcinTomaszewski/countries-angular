@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
+import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/utils/data';
 
 @Component({
@@ -10,15 +10,15 @@ import { Country } from 'src/app/utils/data';
 })
 export class FavoriteCountriesComponent implements OnInit {
   favorite: Country[] = [];
-  constructor(private data: DataService) {}
+  constructor(private countries: CountriesService) {}
 
   ngOnInit(): void {
-    this.data.countriesObs
+    this.countries.countries$
       .pipe(
         map((countries: Country[]) =>
           countries.filter((country) => country.favorite)
         )
       )
-      .subscribe((country) => (this.favorite = country));
+      .subscribe((countries) => (this.favorite = countries));
   }
 }

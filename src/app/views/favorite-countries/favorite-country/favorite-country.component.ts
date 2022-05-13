@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/utils/data';
 
 @Component({
@@ -9,17 +9,22 @@ import { Country } from 'src/app/utils/data';
 })
 export class FavoriteCountryComponent implements OnInit {
   @Input() country!: Country;
-  constructor(private data: DataService) {}
+  constructor(private countries: CountriesService) {}
 
   ngOnInit(): void {}
 
-  toggleFavorite(event: Event, name: string) {
+  toggleFavorite(event: Event, country: Country) {
     event.preventDefault();
-    this.data.toggleFavorite(name);
+    let setFavorite = true;
+    if (country.favorite) setFavorite = false;
+    this.countries.editCountry(country.id, {
+      ...country,
+      favorite: setFavorite,
+    });
   }
 
-  deleteCountry(event: Event, name: string) {
+  deleteCountry(event: Event, id: string) {
     event.preventDefault();
-    this.data.deleteCountry(name);
+    this.countries.deleteCountry(id);
   }
 }

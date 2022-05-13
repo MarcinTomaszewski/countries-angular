@@ -1,3 +1,7 @@
 .home-wrapper {
   display: flex;
 }
+
+.home-second-ele {
+  flex-grow: 2;
+}

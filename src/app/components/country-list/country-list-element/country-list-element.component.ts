@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/utils/data';
 
 @Component({
@@ -13,24 +13,24 @@ export class CountryListElementComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private data: DataService
+    private countries: CountriesService
   ) {}
 
-  goToCountry(name: string) {
-    this.router.navigate([name], { relativeTo: this.route });
-  }
-
-  toggleFavorite(event: Event, name: string) {
+  toggleFavorite(event: Event, country: Country) {
     event.preventDefault();
     event.stopPropagation();
-    this.data.toggleFavorite(name);
+    let setFavorite = true;
+    if (country.favorite) setFavorite = false;
+    this.countries.editCountry(country.id, {
+      ...country,
+      favorite: setFavorite,
+    });
   }
 
-  deleteCountry(event: Event, name: string) {
+  deleteCountry(event: Event, id: string) {
     event.preventDefault();
     event.stopPropagation();
-    this.data.deleteCountry(name);
-
+    this.countries.deleteCountry(id);
     this.router.navigate(['/home'], { relativeTo: this.route });
   }
 }

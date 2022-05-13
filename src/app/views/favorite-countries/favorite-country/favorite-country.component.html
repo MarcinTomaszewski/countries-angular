@@ -10,15 +10,15 @@
         >Edit Country</a
       >
       <span
-        (click)="toggleFavorite($event, country.name)"
+        (click)="toggleFavorite($event, country)"
         class="material-icons icon"
         [class.favorite]="country.favorite"
         title="Remove from Favorite"
         >star</span
       >
       <span
-        (click)="deleteCountry($event, country.name)"
-        class="material-icons icon"
+        (click)="deleteCountry($event, country.id)"
+        class="material-icons icon-delete"
         [class.favorite]="country.favorite"
         title="Delete from data"
         >delete_forever</span

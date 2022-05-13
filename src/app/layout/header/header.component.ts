@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   menuActive = true;
   toggleMenu = false;
-  constructor() {}
+  isLogged = false;
 
   ngOnInit(): void {
     this.handleResize();

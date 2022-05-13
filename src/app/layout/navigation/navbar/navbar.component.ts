@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
+import { map } from 'rxjs';
+import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/utils/data';
 
 @Component({
@@ -9,19 +9,16 @@ import { Country } from 'src/app/utils/data';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  favoriteLength = 0;
-  constructor(private data: DataService) {}
+  length = 0;
+  constructor(private countries: CountriesService) {}
 
   ngOnInit(): void {
-    this.data.countriesObs
+    this.countries.countries$
       .pipe(
         map((countries: Country[]) =>
           countries.filter((country) => country.favorite)
         )
       )
-      .subscribe((countries) => (this.favoriteLength = countries.length));
-    // this.data.favoriteObs.subscribe(
-    //   (countries) => (this.favoriteLength = countries.length)
-    // );
+      .subscribe((countries) => (this.length = countries.length));
   }
 }

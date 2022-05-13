@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
-import { City, Country } from 'src/app/utils/data';
+import { CountriesService } from 'src/app/services/countries.service';
+import { Country } from 'src/app/utils/data';
 
 @Component({
   selector: 'app-edit-country',
@@ -11,12 +11,26 @@ import { City, Country } from 'src/app/utils/data';
 })
 export class EditCountryComponent implements OnInit {
   countryForm!: FormGroup;
-  name = '';
+  id = '';
   flag: string | ArrayBuffer | null = '';
+  countryInForm: Country = {
+    id: '',
+    capital: '',
+    name: '',
+    region: '',
+    population: 0,
+    flag: '',
+    cities: [],
+    nativeName: '',
+    alpha2Code: '',
+    alpha3Code: '',
+    numericCode: '',
+    favorite: false,
+  };
   constructor(
-    private data: DataService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private countries: CountriesService
   ) {}
 
   get controls() {
@@ -26,7 +40,14 @@ export class EditCountryComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.name = params['name'];
+      this.id = params['id'];
+    });
+
+    this.countries.countries$.subscribe((countries) => {
+      // @ts-expect-error:
+      this.countryInForm = countries.find(
+        (country: Country) => country.id === this.id
+      );
     });
 
     this.initCountryForm();
@@ -44,19 +65,18 @@ export class EditCountryComponent implements OnInit {
   }
 
   initCountryForm() {
-    const countryInForm = this.data.getCountryObj(this.name);
-    let name = countryInForm?.name;
-    let capital = countryInForm?.capital;
-    let region = countryInForm?.region;
-    let population = countryInForm?.population;
+    let name = this.countryInForm.name;
+    let capital = this.countryInForm?.capital;
+    let region = this.countryInForm?.region;
+    let population = this.countryInForm?.population;
     let cities = new FormArray([]);
-    let nativeName = countryInForm?.nativeName;
-    let alpha2Code = countryInForm?.alpha2Code;
-    let alpha3Code = countryInForm?.alpha3Code;
-    let numericCode = countryInForm?.numericCode;
+    let nativeName = this.countryInForm?.nativeName;
+    let alpha2Code = this.countryInForm?.alpha2Code;
+    let alpha3Code = this.countryInForm?.alpha3Code;
+    let numericCode = this.countryInForm?.numericCode;
 
-    if (countryInForm?.['cities']) {
-      for (let city of countryInForm?.['cities']) {
+    if (this.countryInForm['cities']) {
+      for (let city of this.countryInForm['cities']) {
         cities.push(
           new FormGroup({
             name: new FormControl(city.name, Validators.required),
@@ -80,11 +100,12 @@ export class EditCountryComponent implements OnInit {
   }
 
   onSubmit() {
-    this.data.editCountry(this.name, {
+    this.countries.editCountry(this.id, {
+      ...this.countryInForm,
       ...this.countryForm.value,
       flag: this.flag,
     });
-    this.router.navigate(['/home/' + this.countryForm.value.name], {
+    this.router.navigate(['/home/' + this.id], {
       relativeTo: this.route,
     });
   }

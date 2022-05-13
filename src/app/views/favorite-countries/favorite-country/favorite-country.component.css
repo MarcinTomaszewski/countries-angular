@@ -104,8 +104,13 @@ small {
   background-color: white;
 }
 .icon {
+  color: yellow;
   cursor: pointer;
 }
-.icon:hover {
+.icon-delete {
+  cursor: pointer;
+  color: black;
+}
+.icon-delete:hover {
   color: yellow;
 }
