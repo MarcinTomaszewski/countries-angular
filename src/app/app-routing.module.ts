@@ -7,16 +7,18 @@ import { NewCountryComponent } from './components/new-country/new-country.compon
 import { EditCountryComponent } from './components/edit-country/edit-country.component';
 import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.component';
 import { FileReaderComponent } from './views/file-reader/file-reader.component';
-import { LoginComponent } from './views/login/login.component';
+import { AuthComponent } from './views/auth/auth.component';
+import { WelcomeComponent } from './views/welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', component: WelcomeComponent },
+  { path: 'login', component: AuthComponent },
   {
     path: 'home',
     component: HomeComponent,
     children: [
       { path: '', component: CountryComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: AuthComponent },
       { path: 'add-country', component: NewCountryComponent },
       { path: 'drag-and-drop', component: DragAndDropComponent },
       { path: 'file-reader', component: FileReaderComponent },

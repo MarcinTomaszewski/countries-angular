@@ -20,7 +20,8 @@ import { FavoriteCountriesComponent } from './views/favorite-countries/favorite-
 import { FavoriteCountryComponent } from './views/favorite-countries/favorite-country/favorite-country.component';
 import { DragAndDropComponent } from './views/drag-and-drop/drag-and-drop.component';
 import { FileReaderComponent } from './views/file-reader/file-reader.component';
-import { LoginComponent } from './views/login/login.component';
+import { AuthComponent } from './views/auth/auth.component';
+import { WelcomeComponent } from './views/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LoginComponent } from './views/login/login.component';
     FavoriteCountryComponent,
     DragAndDropComponent,
     FileReaderComponent,
-    LoginComponent,
+    AuthComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
