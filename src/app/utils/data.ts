@@ -20,12 +20,15 @@ export interface City {
   name: string;
 }
 
-export interface User {
-  id?: number;
-  name: string;
-  password: string;
-  favorite: string[];
+export interface AuthResData {
+  idToken: string; //	A Firebase Auth ID token for the newly created user.
+  email: string; //	The email for the newly created user.
+  refreshToken: string; //	A Firebase Auth refresh token for the newly created user.
+  expiresIn: string; //The number of seconds in which the ID token expires.
+  localId: string; //	The uid of the newly created user.
+  registred?: boolean; //Whether the email is for an existing account.
 }
+
 export const countries = [
   {
     name: 'Afghanistan',

@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  exhaustMap,
+  map,
+  Observable,
+  switchMap,
+  take,
+} from 'rxjs';
 import { Country } from '../utils/data';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +21,17 @@ export class HttpService {
     'https://countries-angular-default-rtdb.europe-west1.firebasedatabase.app/countries/';
   isLoaded$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getCountries(): Observable<Country[]> {
     this.isLoaded$.next(true);
-    return this.http.get<Country[]>(this.countriesUrl).pipe(
+    return this.auth.userObs.pipe(
+      take(1),
+      exhaustMap((user) => {
+        return this.http.get<Country[]>(
+          this.countriesUrl + '?auth=' + user.token
+        );
+      }),
       map((countries) => {
         let newCountries: Country[] = [];
         for (const key in countries) {
@@ -31,7 +45,9 @@ export class HttpService {
   }
 
   getCountry(id: string): Observable<Country> {
-    return this.http.get<Country>(this.countryUrl + id + '.json');
+    return this.http.get<Country>(
+      this.countryUrl + id + '.json?auth=' + this.auth.token
+    );
   }
 
   editCountry(id: string, newCountry: Country): Observable<Country> {

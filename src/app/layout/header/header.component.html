@@ -10,12 +10,12 @@
     <div *ngIf="!menuActive" class="header-icon" (click)="toggleMenuMobile()">
       <i class="material-icons" [class]="'icon'">menu</i>
     </div>
-    <!-- <div class="btn-wrapper">
-      <button class="btn-main" routerLink="/login">Log In</button> -->
+    <div *ngIf="isLogged" class="btn-wrapper">
+      <button class="btn-main" routerLink="/login">Log Out</button> -->
 
-    <!-- <button class="btn-main" (click)="saveCountriesInFirebase()">
+      <!-- <button class="btn-main" (click)="saveCountriesInFirebase()">
         Save Data
       </button> -->
-    <!-- </div> -->
+    </div>
   </div>
 </header>

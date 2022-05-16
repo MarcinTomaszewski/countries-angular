@@ -1,8 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { AuthResData } from 'src/app/utils/data';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +14,7 @@ export class AuthComponent {
   isLoginMode = true;
   error = '';
   isLoading = false;
+  authObs!: Observable<AuthResData>;
 
   constructor(private router: Router, private auth: AuthService) {}
 
@@ -25,19 +27,22 @@ export class AuthComponent {
 
     this.isLoading = true;
     if (this.isLoginMode) {
-      console.log('loginMode');
+      this.authObs = this.auth.login(email, password);
     } else {
-      this.auth.signup(email, password).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.isLoading = false;
-        },
-        error: (error) => {
-          this.error = error;
-          this.isLoading = false;
-        },
-      });
+      this.authObs = this.auth.signup(email, password);
     }
+
+    this.authObs.subscribe({
+      next: (res) => {
+        console.log(res);
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        this.error = error;
+        this.isLoading = false;
+      },
+    });
 
     form.reset();
   }

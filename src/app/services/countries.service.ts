@@ -11,6 +11,21 @@ export class CountriesService {
   countries$ = new BehaviorSubject<Country[]>(this.countries);
   inputValue = '';
   inputValue$ = new BehaviorSubject<string>('');
+  country: Country = {
+    id: '',
+    capital: '',
+    name: '',
+    region: '',
+    population: 0,
+    flag: '',
+    cities: [],
+    nativeName: '',
+    alpha2Code: '',
+    alpha3Code: '',
+    numericCode: '',
+    favorite: false,
+  };
+  country$ = new BehaviorSubject<Country>(this.country);
 
   constructor(private http: HttpService) {}
 
@@ -20,6 +35,15 @@ export class CountriesService {
       this.countries$.next(countries);
       this.http.setIsLoaded(false);
     });
+  }
+
+  getCountry(id: string) {
+    this.http.getCountry(id).subscribe((country) => {
+      this.country = country;
+      this.country$.next(this.country);
+      console.log(country);
+    });
+    return this.country$;
   }
 
   addCountry(country: Country) {
