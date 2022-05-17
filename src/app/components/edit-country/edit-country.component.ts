@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CountriesService } from 'src/app/services/countries.service';
@@ -13,7 +13,7 @@ export class EditCountryComponent implements OnInit {
   countryForm!: FormGroup;
   id = '';
   flag: string | ArrayBuffer | null = '';
-  countryInForm: Country = {
+  countryInForm: Country | undefined = {
     id: '',
     capital: '',
     name: '',
@@ -27,6 +27,8 @@ export class EditCountryComponent implements OnInit {
     numericCode: '',
     favorite: false,
   };
+  isEdit = false;
+  @Input() country!: Country;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -39,16 +41,20 @@ export class EditCountryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
+    // this.route.params.subscribe((params: Params) => {
+    //   this.id = params['id'];
+    // });
 
-    this.countries.countries$.subscribe((countries) => {
-      // @ts-expect-error:
-      this.countryInForm = countries.find(
-        (country: Country) => country.id === this.id
-      );
-    });
+    // this.countries.countries$.subscribe((countries) => {
+    //   let newCountry = countries.find(
+    //     (country: Country) => country.id === this.id
+    //   );
+
+    // this.countryInForm = newCountry;
+    // });
+
+    this.countryInForm = this.country;
+    this.id = this.country.id;
 
     this.initCountryForm();
   }
@@ -65,7 +71,7 @@ export class EditCountryComponent implements OnInit {
   }
 
   initCountryForm() {
-    let name = this.countryInForm.name;
+    let name = this.countryInForm?.name;
     let capital = this.countryInForm?.capital;
     let region = this.countryInForm?.region;
     let population = this.countryInForm?.population;
@@ -74,8 +80,9 @@ export class EditCountryComponent implements OnInit {
     let alpha2Code = this.countryInForm?.alpha2Code;
     let alpha3Code = this.countryInForm?.alpha3Code;
     let numericCode = this.countryInForm?.numericCode;
-
+    // @ts-expect-error
     if (this.countryInForm['cities']) {
+      // @ts-expect-error
       for (let city of this.countryInForm['cities']) {
         cities.push(
           new FormGroup({

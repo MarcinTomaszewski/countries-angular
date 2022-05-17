@@ -15,12 +15,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userSub!: Subscription;
   constructor(private countries: CountriesService, private auth: AuthService) {}
 
-  ngOnDestroy(): void {
-    this.userSub.unsubscribe();
-  }
-
   ngOnInit(): void {
-    this.auth.userObs.subscribe((user) => {
+    this.userSub = this.auth.userObs.subscribe((user) => {
       this.isLogged = !!user; //!user ? false : true;
     });
     this.countries.countries$
@@ -30,5 +26,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe((countries) => (this.length = countries.length));
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 }

@@ -1,14 +1,12 @@
 <section class="wrapper" *ngIf="country">
-  <div class="country">
+  <div *ngIf="!isEdit" class="country">
     <div class="title">
       <h3>
         {{ country.name }}
         <br />
         <small> {{ country.nativeName }} </small>
       </h3>
-      <a [routerLink]="['/home/edit/' + country.id]" class="btn-edit"
-        >Edit Country</a
-      >
+      <a (click)="handleEdit()" class="btn-edit">Edit Country</a>
     </div>
 
     <div class="table">
@@ -51,4 +49,5 @@
       </div>
     </div>
   </div>
+  <app-edit-country *ngIf="isEdit" [country]="country"></app-edit-country>
 </section>

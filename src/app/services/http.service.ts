@@ -32,11 +32,16 @@ export class HttpService {
           this.countriesUrl + '?auth=' + user.token
         );
       }),
+
       map((countries) => {
         let newCountries: Country[] = [];
         for (const key in countries) {
           if (countries.hasOwnProperty(key)) {
-            newCountries.push({ ...countries[key], id: key });
+            newCountries.push({
+              ...countries[key],
+              id: key,
+              cities: [{ name: 'Warsaw' }],
+            });
           }
         }
         return newCountries;
@@ -51,16 +56,23 @@ export class HttpService {
   }
 
   editCountry(id: string, newCountry: Country): Observable<Country> {
-    return this.http.put<Country>(this.countryUrl + id + '.json', newCountry);
+    return this.http.put<Country>(
+      `${this.countryUrl}${id}.json?auth=${this.auth.token}`,
+      newCountry
+    );
   }
-
   addCountry(newCountry: Country): Observable<{ name: string }> {
     newCountry = { ...newCountry, favorite: false };
-    return this.http.post<{ name: string }>(this.countriesUrl, newCountry);
+    return this.http.post<{ name: string }>(
+      this.countriesUrl + '?auth=' + this.auth.token,
+      newCountry
+    );
   }
 
   deleteCountry(id: string): Observable<null> {
-    return this.http.delete<null>(this.countryUrl + id + '.json');
+    return this.http.delete<null>(
+      this.countryUrl + id + '.json?auth=' + this.auth.token
+    );
   }
 
   setIsLoaded(value: boolean) {

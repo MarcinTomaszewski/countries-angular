@@ -21,9 +21,9 @@
 .header-icon {
   position: absolute;
   margin: auto;
-  top: 50%;
+  top: 30%;
   left: 1.5rem;
-  margin-top: 23px;
+  height: 80px;
 }
 .icon {
   cursor: pointer;
@@ -34,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80px;
 }
 
 .btn-main {

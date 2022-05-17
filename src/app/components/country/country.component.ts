@@ -11,27 +11,28 @@ import { Country } from 'src/app/utils/data';
 })
 export class CountryComponent implements OnInit {
   country!: Country;
-  id = '-N1sV3apb6CMVmW71F6D';
+  id = '-N2GJK2MPLHX_Vgytg-Z';
   isLoaded: boolean | undefined;
-  constructor(
-    private route: ActivatedRoute,
-    private countries: CountriesService,
-    private http: HttpService
-  ) {}
+  isEdit = false;
+  constructor(private route: ActivatedRoute, private http: HttpService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       if (!params['id']) {
-        // console.log('bez params');
-        this.http
-          .getCountry(this.id)
-          .subscribe((country) => (this.country = country));
+        this.http.getCountry(this.id).subscribe((country) => {
+          this.country = country;
+          this.isEdit = false;
+        });
       } else {
-        // console.log('sa params');
-        this.http
-          .getCountry(params['id'])
-          .subscribe((country) => (this.country = country));
+        this.http.getCountry(params['id']).subscribe((country) => {
+          this.country = { ...country, id: params['id'] };
+          this.isEdit = false;
+        });
       }
     });
+  }
+
+  handleEdit() {
+    this.isEdit = true;
   }
 }

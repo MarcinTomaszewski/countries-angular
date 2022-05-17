@@ -67,7 +67,7 @@ export class CountriesService {
         }
         return item;
       });
-      this.countries$.next(this.countries);
+      this.countries$.next(this.countries.slice());
     });
   }
   saveInputValue(value: string) {
