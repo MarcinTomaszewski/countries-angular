@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   BehaviorSubject,
   catchError,
@@ -17,10 +18,10 @@ import { User } from '../views/auth/user.model';
 export class AuthService {
   private API_KEY = 'AIzaSyCcpQiBVgwm23CK_3kfgN-8gQJVPfnAgdU';
 
-  userObs = new Subject<User>();
+  userObs = new Subject<User | null>();
   token$ = new BehaviorSubject<string>('');
   token: string | null = '';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string): Observable<AuthResData> {
     return this.http
@@ -48,6 +49,10 @@ export class AuthService {
           this.handleAuth(res.email, res.localId, res.idToken, +res.expiresIn)
         )
       );
+  }
+  logout() {
+    this.userObs.next(null);
+    this.router.navigate(['/login']);
   }
 
   private handleAuth(

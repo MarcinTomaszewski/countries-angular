@@ -10,11 +10,15 @@ import { Country } from 'src/app/utils/data';
   styleUrls: ['./country.component.css'],
 })
 export class CountryComponent implements OnInit {
-  country!: Country;
+  country!: Country | undefined;
   id = '-N2GJK2MPLHX_Vgytg-Z';
   isLoaded: boolean | undefined;
   isEdit = false;
-  constructor(private route: ActivatedRoute, private http: HttpService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpService,
+    private countries: CountriesService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -30,6 +34,16 @@ export class CountryComponent implements OnInit {
         });
       }
     });
+  }
+  setEdit(value: boolean) {
+    this.isEdit = value;
+
+    this.countries.countries$.subscribe((countries) => {
+      this.country = countries.find(
+        (country) => country.id === this.country?.id
+      );
+    });
+    this.isEdit = false;
   }
 
   handleEdit() {

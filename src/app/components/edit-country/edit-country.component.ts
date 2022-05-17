@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CountriesService } from 'src/app/services/countries.service';
@@ -27,8 +27,10 @@ export class EditCountryComponent implements OnInit {
     numericCode: '',
     favorite: false,
   };
-  isEdit = false;
+
   @Input() country!: Country;
+  @Output() isEdit = new EventEmitter<boolean>();
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -112,6 +114,7 @@ export class EditCountryComponent implements OnInit {
       ...this.countryForm.value,
       flag: this.flag,
     });
+    this.isEdit.emit(false);
     this.router.navigate(['/home/' + this.id], {
       relativeTo: this.route,
     });

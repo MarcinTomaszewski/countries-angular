@@ -29,7 +29,7 @@ export class HttpService {
       take(1),
       exhaustMap((user) => {
         return this.http.get<Country[]>(
-          this.countriesUrl + '?auth=' + user.token
+          this.countriesUrl + '?auth=' + user?.token
         );
       }),
 

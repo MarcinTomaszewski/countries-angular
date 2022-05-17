@@ -49,5 +49,9 @@
       </div>
     </div>
   </div>
-  <app-edit-country *ngIf="isEdit" [country]="country"></app-edit-country>
+  <app-edit-country
+    *ngIf="isEdit"
+    [country]="country"
+    (isEdit)="setEdit($event)"
+  ></app-edit-country>
 </section>
