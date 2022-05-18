@@ -82,9 +82,8 @@ export class EditCountryComponent implements OnInit {
     let alpha2Code = this.countryInForm?.alpha2Code;
     let alpha3Code = this.countryInForm?.alpha3Code;
     let numericCode = this.countryInForm?.numericCode;
-    // @ts-expect-error
+
     if (this.countryInForm['cities']) {
-      // @ts-expect-error
       for (let city of this.countryInForm['cities']) {
         cities.push(
           new FormGroup({

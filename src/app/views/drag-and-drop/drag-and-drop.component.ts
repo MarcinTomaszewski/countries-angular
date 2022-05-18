@@ -32,7 +32,6 @@ export class DragAndDropComponent {
   }
 
   handleDrop(event: DragEvent, ref: HTMLDivElement) {
-    // @ts-expect-error:
     const data: DataTransfer = event.dataTransfer;
     const files = data.files as FileList;
     if (files.length) {
@@ -56,10 +55,8 @@ export class DragAndDropComponent {
 
     var reader = new FileReader();
     reader.onload = (e) => {
-      // @ts-expect-error:
-      img.src = e.target.result;
+      img.src = e.target.result as string;
 
-      // @ts-expect-error:
       this.image.nativeElement.src = e.target.result;
     };
 
