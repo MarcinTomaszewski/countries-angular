@@ -29,6 +29,11 @@ export interface AuthResData {
   registred?: boolean; //Whether the email is for an existing account.
 }
 
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
 export const countries = [
   {
     name: 'Afghanistan',

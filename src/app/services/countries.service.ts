@@ -40,6 +40,7 @@ export class CountriesService {
   getCountry(id: string) {
     this.http.getCountry(id).subscribe((country) => {
       this.country = country;
+      console.log('country', country);
       this.country$.next(this.country);
       console.log(country);
     });

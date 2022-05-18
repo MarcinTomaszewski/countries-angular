@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthGoogleService } from 'src/app/services/auth-google.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogged = false;
   userSub!: Subscription;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthGoogleService) {}
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();

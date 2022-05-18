@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Subscription } from 'rxjs';
+import { AuthGoogleService } from 'src/app/services/auth-google.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/utils/data';
@@ -13,7 +14,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   length = 0;
   isLogged = false;
   userSub!: Subscription;
-  constructor(private countries: CountriesService, private auth: AuthService) {}
+  constructor(
+    private countries: CountriesService,
+    private auth: AuthGoogleService
+  ) {}
 
   ngOnInit(): void {
     this.userSub = this.auth.userObs.subscribe((user) => {
