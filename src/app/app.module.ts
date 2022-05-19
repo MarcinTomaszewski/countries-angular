@@ -6,7 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+// @angular/fire - old modules available elsewhere in new api - from September 2022
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';

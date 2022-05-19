@@ -58,13 +58,13 @@ export class HttpService {
 
   getCountry(id: string): Observable<Country> {
     // if (!this.token) {
-    //   return this.auth.tokenObs.pipe(
-    //     switchMap((token) => {
-    //       return this.http.get<Country>(
-    //         this.countryUrl + id + '.json?auth=' + token
-    //       );
-    //     })
-    //   );
+    // return this.auth.tokenObs.pipe(
+    //   switchMap((token) => {
+    //     return this.http.get<Country>(
+    //       this.countryUrl + id + '.json?auth=' + token
+    //     );
+    //   })
+    // );
     // } else {
     return this.http.get<Country>(
       this.countryUrl + id + '.json?auth=' + this.token

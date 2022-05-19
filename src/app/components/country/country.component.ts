@@ -16,39 +16,34 @@ export class CountryComponent implements OnInit, OnDestroy {
   id = '-N2GJK2MPLHX_Vgytg-Z';
   isLoaded: boolean | undefined;
   isEdit = false;
-  countrySub: Subscription;
+  sub: Subscription;
   constructor(
     private route: ActivatedRoute,
     private http: HttpService,
     private countries: CountriesService,
     private auth: AuthGoogleService
   ) {}
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      if (!params['id'] || this.auth.user.id) {
-        console.log('jestem');
-        this.countrySub = this.countries
-          .getCountry(this.id)
-          .subscribe((country) => {
-            this.country = country;
-            this.isEdit = false;
-          });
-      } else {
-        console.log('params id exists', params['id']);
-        this.countrySub = this.countries
-          .getCountry(params['id'])
-          .subscribe((country) => {
-            this.country = { ...country, id: params['id'] };
-            console.log('country', country);
-            this.isEdit = false;
-          });
-      }
+      // if (!params['id']) {
+      //   this.countries.getCountry(this.id).subscribe((country) => {
+      //     this.country = country;
+      //     this.isEdit = false;
+      //   });
+      // } else {
+      this.sub = this.countries
+        .getCountry(params['id'])
+        .subscribe((country) => {
+          console.log('tutaj');
+          this.country = { ...country, id: params['id'] };
+          this.isEdit = false;
+        });
+      // }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.countrySub.unsubscribe();
   }
 
   setEdit(value: boolean) {

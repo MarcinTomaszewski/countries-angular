@@ -7,8 +7,9 @@ import {
   signInWithPopup,
   signOut,
 } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { LoginData } from '../utils/data';
 
 interface User {
@@ -44,14 +45,15 @@ export class AuthGoogleService {
       .catch((err) => console.log(err));
   }
   loginWithGoogle() {
-    return signInWithPopup(this.auth, new GoogleAuthProvider());
+    return signInWithPopup(this.auth, new GoogleAuthProvider()).then((res) => {
+      console.log(res);
+    });
   }
 
   register({ email, password }: LoginData) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
   logout() {
-    console.log('logout');
     this.user = { id: '', token: '', email: '' };
     this.tokenObs.next('');
     this.userObs.next(null);

@@ -20,7 +20,7 @@ export class AuthComponent {
 
   constructor(
     private router: Router,
-    private auth: AuthGoogleService,
+    public auth: AuthGoogleService,
     private countries: CountriesService
   ) {}
 
